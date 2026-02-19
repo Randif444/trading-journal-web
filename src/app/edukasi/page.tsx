@@ -16,6 +16,7 @@ import {
   Target,
 } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+import PageTransition from "@/components/PageTransition";
 
 // --- DATA ARTIKEL ---
 const articles = [
@@ -128,77 +129,80 @@ export default function EdukasiPage() {
       <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-6 space-y-16 relative z-10">
-        {/* --- HEADER --- */}
-        <div className="text-center max-w-2xl mx-auto space-y-6">
+      {/* --- BUNGKUS KONTEN DENGAN ANIMASI SLOW --- */}
+      <PageTransition>
+        <div className="max-w-6xl mx-auto px-6 space-y-16 relative z-10">
+          {/* --- HEADER --- */}
+          <div className="text-center max-w-2xl mx-auto space-y-6">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", bounce: 0.5 }}
+              className="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(245,158,11,0.3)]"
+            >
+              <BookOpen className="w-8 h-8 text-white drop-shadow-md" />
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-5xl font-extrabold mb-4"
+            >
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+                Pusat Edukasi
+              </span>{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600 drop-shadow-sm">
+                Trading
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-slate-400 text-lg"
+            >
+              Kumpulan materi teknikal, fundamental, dan psikologi. Gratis,
+              tanpa kelas berbayar.
+            </motion.p>
+
+            {/* Search Bar (Kaca Hitam) */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="relative max-w-md mx-auto"
+            >
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Cari materi (misal: psikologi)..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-black/40 backdrop-blur-xl border border-white/10 rounded-full py-4 pl-12 pr-6 text-white focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all placeholder:text-slate-500 shadow-inner"
+              />
+            </motion.div>
+          </div>
+
+          {/* --- ARTICLES GRID --- */}
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", bounce: 0.5 }}
-            className="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(245,158,11,0.3)]"
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            <BookOpen className="w-8 h-8 text-white drop-shadow-md" />
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-extrabold mb-4"
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
-              Pusat Edukasi
-            </span>{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600 drop-shadow-sm">
-              Trading
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-slate-400 text-lg"
-          >
-            Kumpulan materi teknikal, fundamental, dan psikologi. Gratis, tanpa
-            kelas berbayar.
-          </motion.p>
-
-          {/* Search Bar (Kaca Hitam) */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="relative max-w-md mx-auto"
-          >
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Cari materi (misal: psikologi)..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-black/40 backdrop-blur-xl border border-white/10 rounded-full py-4 pl-12 pr-6 text-white focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all placeholder:text-slate-500 shadow-inner"
-            />
+            {filteredArticles.length > 0 ? (
+              filteredArticles.map((article) => (
+                <ArticleCard key={article.id} data={article} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-20 text-slate-500 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 border-dashed">
+                <p>Materi tidak ditemukan. Coba kata kunci lain.</p>
+              </div>
+            )}
           </motion.div>
         </div>
-
-        {/* --- ARTICLES GRID --- */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {filteredArticles.length > 0 ? (
-            filteredArticles.map((article) => (
-              <ArticleCard key={article.id} data={article} />
-            ))
-          ) : (
-            <div className="col-span-full text-center py-20 text-slate-500 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 border-dashed">
-              <p>Materi tidak ditemukan. Coba kata kunci lain.</p>
-            </div>
-          )}
-        </motion.div>
-      </div>
+      </PageTransition>
     </main>
   );
 }

@@ -10,6 +10,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+import PageTransition from "@/components/PageTransition";
 
 // --- ANIMASI CONFIG ---
 const fadeInUp: Variants = {
@@ -39,204 +40,207 @@ export default function ReviewPage() {
       <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
       <div className="absolute bottom-10 left-1/3 w-[600px] h-[600px] bg-emerald-600/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
-      {/* Konten Utama (Diberi relative z-10 agar berada di atas lampu sorot) */}
-      <div className="max-w-6xl mx-auto px-6 space-y-24 relative z-10">
-        {/* HEADER */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
-            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
-              Review
-            </span>{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600">
-              Propfirm
-            </span>
-          </h1>
-          <p className="text-lg text-slate-400">
-            Review jujur berdasarkan pengalaman pribadi. Tidak ada yang
-            sempurna, tapi ini adalah{" "}
-            <span className="text-slate-200 font-bold">Top 3 Pilihan</span> yang
-            paling masuk akal untuk trader Indonesia.
-          </p>
-        </motion.div>
+      {/* --- BUNGKUS KONTEN DENGAN ANIMASI SLOW --- */}
+      <PageTransition>
+        {/* Konten Utama (Diberi relative z-10 agar berada di atas lampu sorot) */}
+        <div className="max-w-6xl mx-auto px-6 space-y-24 relative z-10">
+          {/* HEADER */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+                Review
+              </span>{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600">
+                Propfirm
+              </span>
+            </h1>
+            <p className="text-lg text-slate-400">
+              Review jujur berdasarkan pengalaman pribadi. Tidak ada yang
+              sempurna, tapi ini adalah{" "}
+              <span className="text-slate-200 font-bold">Top 3 Pilihan</span>{" "}
+              yang paling masuk akal untuk trader Indonesia.
+            </p>
+          </motion.div>
 
-        {/* --- TOP 3 CARDS (THE5ERS, FTMO, FUNDING PIPS) --- */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-        >
-          {/* 1. THE5ERS */}
-          <PropCard
-            logo="/assets/the5ers.webp"
-            title="The5ers"
-            rating="4.9"
-            badge="BEST OVERALL"
-            badgeColor="bg-amber-500 text-slate-900"
-            desc="Pilihan utama saya untuk High Stakes Challenge. Gaji bulanan & Growth Plan yang jelas."
-            pros={[
-              "Instant Funding Available",
-              "Gaji Bulanan (High Stakes)",
-              "Rule Paling Jelas",
-            ]}
-            cons={["Biaya sedikit lebih tinggi"]}
-            link="https://the5ers.com?ref=kangtrader"
-            color="amber"
-          />
+          {/* --- TOP 3 CARDS (THE5ERS, FTMO, FUNDING PIPS) --- */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          >
+            {/* 1. THE5ERS */}
+            <PropCard
+              logo="/assets/the5ers.webp"
+              title="The5ers"
+              rating="4.9"
+              badge="BEST OVERALL"
+              badgeColor="bg-amber-500 text-slate-900"
+              desc="Pilihan utama saya untuk High Stakes Challenge. Gaji bulanan & Growth Plan yang jelas."
+              pros={[
+                "Instant Funding Available",
+                "Gaji Bulanan (High Stakes)",
+                "Rule Paling Jelas",
+              ]}
+              cons={["Biaya sedikit lebih tinggi"]}
+              link="https://the5ers.com?ref=kangtrader"
+              color="amber"
+            />
 
-          {/* 2. FTMO */}
-          <PropCard
-            logo="/assets/ftmo.webp"
-            title="FTMO"
-            rating="4.8"
-            badge="LEGENDARY"
-            badgeColor="bg-purple-500 text-white"
-            desc="Raja propfirm dengan reputasi terbaik. Pilihan paling aman jika budget bukan masalah."
-            pros={[
-              "Reputasi Terbaik (No Scam)",
-              "Swing Account Ada",
-              "Dashboard Canggih",
-            ]}
-            cons={["Biaya Termahal (€540)", "Target Profit Tinggi (10%)"]}
-            link="https://ftmo.com/en/"
-            color="purple"
-          />
+            {/* 2. FTMO */}
+            <PropCard
+              logo="/assets/ftmo.webp"
+              title="FTMO"
+              rating="4.8"
+              badge="LEGENDARY"
+              badgeColor="bg-purple-500 text-white"
+              desc="Raja propfirm dengan reputasi terbaik. Pilihan paling aman jika budget bukan masalah."
+              pros={[
+                "Reputasi Terbaik (No Scam)",
+                "Swing Account Ada",
+                "Dashboard Canggih",
+              ]}
+              cons={["Biaya Termahal (€540)", "Target Profit Tinggi (10%)"]}
+              link="https://ftmo.com/en/"
+              color="purple"
+            />
 
-          {/* 3. FUNDING PIPS */}
-          <PropCard
-            logo="/assets/fundingpips.webp"
-            title="Funding Pips"
-            rating="4.7"
-            badge="BUDGET KING"
-            badgeColor="bg-emerald-500 text-slate-900"
-            desc="Solusi untuk trader dengan modal terbatas. Tantangan murah dengan leverage tinggi."
-            pros={[
-              "Biaya Termurah ($399)",
-              "Leverage Tinggi",
-              "Waktu Trading Unlimited",
-            ]}
-            cons={["Reputasi Belum Se-senior FTMO", "Sering Maintenance"]}
-            link="https://app.fundingpips.com/register?ref=1d36d65a"
-            color="emerald"
-          />
-        </motion.section>
+            {/* 3. FUNDING PIPS */}
+            <PropCard
+              logo="/assets/fundingpips.webp"
+              title="Funding Pips"
+              rating="4.7"
+              badge="BUDGET KING"
+              badgeColor="bg-emerald-500 text-slate-900"
+              desc="Solusi untuk trader dengan modal terbatas. Tantangan murah dengan leverage tinggi."
+              pros={[
+                "Biaya Termurah ($399)",
+                "Leverage Tinggi",
+                "Waktu Trading Unlimited",
+              ]}
+              cons={["Reputasi Belum Se-senior FTMO", "Sering Maintenance"]}
+              link="https://app.fundingpips.com/register?ref=1d36d65a"
+              color="emerald"
+            />
+          </motion.section>
 
-        {/* --- COMPARISON TABLE --- */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          <div className="flex items-center gap-3 mb-8 justify-center">
-            <TrendingUp className="w-8 h-8 text-amber-500" />
-            <h2 className="text-3xl font-bold text-white">
-              Head-to-Head Comparison
-            </h2>
+          {/* --- COMPARISON TABLE --- */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <div className="flex items-center gap-3 mb-8 justify-center">
+              <TrendingUp className="w-8 h-8 text-amber-500" />
+              <h2 className="text-3xl font-bold text-white">
+                Head-to-Head Comparison
+              </h2>
+            </div>
+
+            <div className="overflow-x-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+              <table className="w-full text-left text-sm text-slate-400">
+                <thead className="bg-black/40 backdrop-blur-md text-slate-200 uppercase font-bold text-xs tracking-wider border-b border-white/10">
+                  <tr>
+                    <th className="px-6 py-5">Fitur (Akun 100k)</th>
+                    <th className="px-6 py-5 text-amber-500 text-base drop-shadow-sm">
+                      The5ers
+                    </th>
+                    <th className="px-6 py-5 text-purple-400 text-base drop-shadow-sm">
+                      FTMO
+                    </th>
+                    <th className="px-6 py-5 text-emerald-400 text-base drop-shadow-sm">
+                      Funding Pips
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  <TableRow
+                    feature="Biaya Challenge"
+                    t5="$495"
+                    ftmo="€540 (~$580)"
+                    fp="$399"
+                    highlight="fp"
+                  />
+                  <TableRow
+                    feature="Profit Target (P1 / P2)"
+                    t5="8% / 5%"
+                    ftmo="10% / 5%"
+                    fp="8% / 5%"
+                    highlight="t5"
+                  />
+                  <TableRow
+                    feature="Max Drawdown"
+                    t5="10% (Static)"
+                    ftmo="10% (Static)"
+                    fp="10% (Trailing)"
+                    highlight="t5"
+                  />
+                  <TableRow
+                    feature="Daily Drawdown"
+                    t5="5% (Equity Based)"
+                    ftmo="5% (Balance Based)"
+                    fp="5%"
+                    highlight="ftmo"
+                  />
+                  <TableRow
+                    feature="Payout"
+                    t5="On Demand"
+                    ftmo="Bi-Weekly"
+                    fp="Weekly"
+                    highlight="t5"
+                  />
+                  <TableRow
+                    feature="Gaji Bulanan?"
+                    t5="YA (High Stakes)"
+                    ftmo="TIDAK"
+                    fp="TIDAK"
+                    highlight="t5"
+                  />
+                </tbody>
+              </table>
+            </div>
+          </motion.section>
+
+          {/* --- TIPS LULUS --- */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            <TipCard
+              icon={<Zap className="w-8 h-8 text-amber-500" />}
+              title="Strategi Lulus (Tanpa FOMO)"
+              desc="Jangan kejar target 8% dalam seminggu. Propfirm modern memberikan waktu Unlimited. Gunakan lot kecil (0.5% risk) dan biarkan compound interest bekerja. Pelan asal selamat."
+            />
+            <TipCard
+              icon={<ShieldAlert className="w-8 h-8 text-rose-500" />}
+              title="Jebakan Daily Drawdown"
+              desc="Banyak trader gagal bukan karena total loss, tapi karena melanggar batas harian 5%. Hitung ulang Equity setiap pagi. Jika equity $99,000, maka batas loss hari itu bukan dari $100,000!"
+            />
+          </motion.section>
+
+          {/* --- DISCLAIMER --- */}
+          <div className="bg-white/5 backdrop-blur-md border border-rose-500/20 p-6 rounded-2xl text-center shadow-lg">
+            <p className="text-sm text-rose-200/70 leading-relaxed">
+              <strong>Disclaimer:</strong> Trading Forex & Propfirm berisiko
+              tinggi. Data di atas bisa berubah sewaktu-waktu sesuai kebijakan
+              perusahaan. Pastikan Anda membaca T&C terbaru di website
+              masing-masing sebelum mendaftar. Saya hanya menyajikan review
+              edukasi, bukan saran investasi.
+            </p>
           </div>
-
-          <div className="overflow-x-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
-            <table className="w-full text-left text-sm text-slate-400">
-              <thead className="bg-black/40 backdrop-blur-md text-slate-200 uppercase font-bold text-xs tracking-wider border-b border-white/10">
-                <tr>
-                  <th className="px-6 py-5">Fitur (Akun 100k)</th>
-                  <th className="px-6 py-5 text-amber-500 text-base drop-shadow-sm">
-                    The5ers
-                  </th>
-                  <th className="px-6 py-5 text-purple-400 text-base drop-shadow-sm">
-                    FTMO
-                  </th>
-                  <th className="px-6 py-5 text-emerald-400 text-base drop-shadow-sm">
-                    Funding Pips
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5">
-                <TableRow
-                  feature="Biaya Challenge"
-                  t5="$495"
-                  ftmo="€540 (~$580)"
-                  fp="$399"
-                  highlight="fp"
-                />
-                <TableRow
-                  feature="Profit Target (P1 / P2)"
-                  t5="8% / 5%"
-                  ftmo="10% / 5%"
-                  fp="8% / 5%"
-                  highlight="t5"
-                />
-                <TableRow
-                  feature="Max Drawdown"
-                  t5="10% (Static)"
-                  ftmo="10% (Static)"
-                  fp="10% (Trailing)"
-                  highlight="t5"
-                />
-                <TableRow
-                  feature="Daily Drawdown"
-                  t5="5% (Equity Based)"
-                  ftmo="5% (Balance Based)"
-                  fp="5%"
-                  highlight="ftmo"
-                />
-                <TableRow
-                  feature="Payout"
-                  t5="On Demand"
-                  ftmo="Bi-Weekly"
-                  fp="Weekly"
-                  highlight="t5"
-                />
-                <TableRow
-                  feature="Gaji Bulanan?"
-                  t5="YA (High Stakes)"
-                  ftmo="TIDAK"
-                  fp="TIDAK"
-                  highlight="t5"
-                />
-              </tbody>
-            </table>
-          </div>
-        </motion.section>
-
-        {/* --- TIPS LULUS --- */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <TipCard
-            icon={<Zap className="w-8 h-8 text-amber-500" />}
-            title="Strategi Lulus (Tanpa FOMO)"
-            desc="Jangan kejar target 8% dalam seminggu. Propfirm modern memberikan waktu Unlimited. Gunakan lot kecil (0.5% risk) dan biarkan compound interest bekerja. Pelan asal selamat."
-          />
-          <TipCard
-            icon={<ShieldAlert className="w-8 h-8 text-rose-500" />}
-            title="Jebakan Daily Drawdown"
-            desc="Banyak trader gagal bukan karena total loss, tapi karena melanggar batas harian 5%. Hitung ulang Equity setiap pagi. Jika equity $99,000, maka batas loss hari itu bukan dari $100,000!"
-          />
-        </motion.section>
-
-        {/* --- DISCLAIMER --- */}
-        <div className="bg-white/5 backdrop-blur-md border border-rose-500/20 p-6 rounded-2xl text-center shadow-lg">
-          <p className="text-sm text-rose-200/70 leading-relaxed">
-            <strong>Disclaimer:</strong> Trading Forex & Propfirm berisiko
-            tinggi. Data di atas bisa berubah sewaktu-waktu sesuai kebijakan
-            perusahaan. Pastikan Anda membaca T&C terbaru di website
-            masing-masing sebelum mendaftar. Saya hanya menyajikan review
-            edukasi, bukan saran investasi.
-          </p>
         </div>
-      </div>
+      </PageTransition>
     </main>
   );
 }

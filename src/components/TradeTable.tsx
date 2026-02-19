@@ -104,12 +104,46 @@ export default function TradeTable({ trades }: { trades: Trade[] }) {
                   <td className="px-6 py-4 text-center text-slate-300 font-medium">
                     {trade.lotSize}
                   </td>
+
+                  {/* KOLOM PNL DENGAN STATUS DIKEMBALIKAN */}
                   <td
-                    className={`px-6 py-4 text-right font-bold ${trade.pnl >= 0 ? "text-emerald-400" : "text-rose-400"}`}
+                    className={`px-6 py-4 text-right font-bold ${
+                      trade.status === "WIN" || trade.status === "TP"
+                        ? "text-emerald-400"
+                        : trade.status === "SL+"
+                          ? "text-cyan-400"
+                          : trade.status === "BE"
+                            ? "text-blue-400"
+                            : trade.status === "SL-"
+                              ? "text-amber-400"
+                              : "text-rose-400"
+                    }`}
                   >
-                    {trade.pnl > 0 ? "+" : ""}
-                    {formatCurrency(trade.pnl)}
+                    <div className="flex flex-col items-end">
+                      <span>
+                        {trade.pnl > 0 ? "+" : ""}
+                        {formatCurrency(trade.pnl)}
+                      </span>
+                      {trade.status && (
+                        <span
+                          className={`text-[10px] px-1.5 py-0.5 rounded uppercase mt-1 border ${
+                            trade.status === "WIN" || trade.status === "TP"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                              : trade.status === "SL+"
+                                ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
+                                : trade.status === "BE"
+                                  ? "bg-blue-500/10 text-blue-400 border-blue-500/20"
+                                  : trade.status === "SL-"
+                                    ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                                    : "bg-rose-500/10 text-rose-400 border-rose-500/20"
+                          }`}
+                        >
+                          {trade.status}
+                        </span>
+                      )}
+                    </div>
                   </td>
+
                   <td className="px-6 py-4">
                     <div className="flex justify-center gap-2">
                       {trade.screenshotBefore && (
@@ -140,7 +174,7 @@ export default function TradeTable({ trades }: { trades: Trade[] }) {
           </table>
         </div>
 
-        {/* PAGINATION: SEKARANG BISA DIGESER DI HP */}
+        {/* PAGINATION */}
         {totalPages > 1 && (
           <div className="px-6 py-4 border-t border-slate-800 bg-slate-900/50 flex items-center justify-between gap-4">
             <button
@@ -151,7 +185,6 @@ export default function TradeTable({ trades }: { trades: Trade[] }) {
               <ChevronLeft className="w-5 h-5" />
             </button>
 
-            {/* CONTAINER ANGKA DENGAN SCROLL HORIZONTAL */}
             <div className="flex gap-2 overflow-x-auto no-scrollbar py-1 px-2 scroll-smooth">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                 (number) => (

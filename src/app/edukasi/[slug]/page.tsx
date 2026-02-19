@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar, User, Tag, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
+import PageTransition from "@/components/PageTransition";
 
 // --- DATA ARTIKEL LENGKAP (BESERTA SEMUA GAMBAR) ---
 // Perhatikan: Semua class Tailwind di dalam HTML ini sudah diubah ke versi Premium (Glassmorphism)
@@ -344,96 +345,100 @@ export default function EdukasiPost() {
         />
       </div>
 
-      <article className="max-w-3xl mx-auto px-6 relative z-10">
-        {/* Back Button (Glass Pill) */}
-        <Link
-          href="/edukasi"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-slate-300 hover:text-amber-400 hover:border-amber-500/40 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] transition-all shadow-lg group mb-10"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="font-medium text-sm">Kembali ke Edukasi</span>
-        </Link>
-
-        {/* Header Artikel */}
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12 border-b border-white/10 pb-10"
-        >
-          <div className="flex gap-2 mb-6">
-            <span className="px-4 py-1.5 bg-amber-500/10 backdrop-blur-md text-amber-500 text-xs font-bold rounded-full border border-amber-500/20 uppercase tracking-widest shadow-inner">
-              {data.category}
-            </span>
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight drop-shadow-sm tracking-tight">
-            {data.title}
-          </h1>
-
-          <div className="flex flex-wrap items-center gap-4 md:gap-8 text-sm text-slate-400 bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl w-fit shadow-inner">
-            <div className="flex items-center gap-2">
-              <User className="w-4 h-4 text-amber-500" />
-              <span className="font-medium text-slate-300">{data.author}</span>
-            </div>
-            <div className="hidden md:block w-px h-4 bg-white/20"></div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-blue-400" />
-              <span>{data.date}</span>
-            </div>
-            <div className="hidden md:block w-px h-4 bg-white/20"></div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-emerald-400" />
-              <span>{data.readTime || "5 min read"}</span>
-            </div>
-          </div>
-        </motion.header>
-
-        {/* --- GAMBAR UTAMA (HERO IMAGE) --- */}
-        {data.image && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1 }}
-            className="rounded-3xl overflow-hidden mb-14 border border-white/10 bg-white/5 backdrop-blur-xl p-3 shadow-2xl relative group"
+      <PageTransition>
+        <article className="max-w-3xl mx-auto px-6 relative z-10">
+          {/* Back Button (Glass Pill) */}
+          <Link
+            href="/edukasi"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-slate-300 hover:text-amber-400 hover:border-amber-500/40 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] transition-all shadow-lg group mb-10"
           >
-            <div className="absolute inset-0 bg-amber-500/10 group-hover:bg-transparent transition duration-700 pointer-events-none rounded-3xl"></div>
-            <img
-              src={data.image}
-              alt={data.title}
-              className="w-full h-auto object-cover rounded-2xl"
-            />
-          </motion.div>
-        )}
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-medium text-sm">Kembali ke Edukasi</span>
+          </Link>
 
-        {/* --- ISI KONTEN (TERMASUK GAMBAR INLINE YG SUDAH DI-GLASSMORPHISM) --- */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="prose prose-invert prose-lg max-w-none text-slate-300 leading-relaxed 
-                     prose-headings:text-white prose-a:text-amber-500 hover:prose-a:text-amber-400 prose-strong:text-white prose-p:mb-6"
-        >
-          <div dangerouslySetInnerHTML={{ __html: data.content }} />
-        </motion.div>
-
-        {/* Footer Artikel */}
-        <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl">
-            <Tag className="w-4 h-4 text-amber-500" />
-            <span className="text-sm text-slate-400 font-medium tracking-wide">
-              Tags:{" "}
-              <span className="text-slate-300">
-                Trading, Edukasi, {data.category}
+          {/* Header Artikel */}
+          <motion.header
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12 border-b border-white/10 pb-10"
+          >
+            <div className="flex gap-2 mb-6">
+              <span className="px-4 py-1.5 bg-amber-500/10 backdrop-blur-md text-amber-500 text-xs font-bold rounded-full border border-amber-500/20 uppercase tracking-widest shadow-inner">
+                {data.category}
               </span>
-            </span>
-          </div>
+            </div>
 
-          <button className="flex items-center justify-center w-full md:w-auto gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-slate-300 font-bold hover:text-white hover:border-blue-500/40 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all shadow-lg group">
-            <Share2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span>Bagikan Artikel</span>
-          </button>
-        </div>
-      </article>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight drop-shadow-sm tracking-tight">
+              {data.title}
+            </h1>
+
+            <div className="flex flex-wrap items-center gap-4 md:gap-8 text-sm text-slate-400 bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-2xl w-fit shadow-inner">
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4 text-amber-500" />
+                <span className="font-medium text-slate-300">
+                  {data.author}
+                </span>
+              </div>
+              <div className="hidden md:block w-px h-4 bg-white/20"></div>
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-blue-400" />
+                <span>{data.date}</span>
+              </div>
+              <div className="hidden md:block w-px h-4 bg-white/20"></div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-emerald-400" />
+                <span>{data.readTime || "5 min read"}</span>
+              </div>
+            </div>
+          </motion.header>
+
+          {/* --- GAMBAR UTAMA (HERO IMAGE) --- */}
+          {data.image && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1 }}
+              className="rounded-3xl overflow-hidden mb-14 border border-white/10 bg-white/5 backdrop-blur-xl p-3 shadow-2xl relative group"
+            >
+              <div className="absolute inset-0 bg-amber-500/10 group-hover:bg-transparent transition duration-700 pointer-events-none rounded-3xl"></div>
+              <img
+                src={data.image}
+                alt={data.title}
+                className="w-full h-auto object-cover rounded-2xl"
+              />
+            </motion.div>
+          )}
+
+          {/* --- ISI KONTEN (TERMASUK GAMBAR INLINE YG SUDAH DI-GLASSMORPHISM) --- */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="prose prose-invert prose-lg max-w-none text-slate-300 leading-relaxed 
+                      prose-headings:text-white prose-a:text-amber-500 hover:prose-a:text-amber-400 prose-strong:text-white prose-p:mb-6"
+          >
+            <div dangerouslySetInnerHTML={{ __html: data.content }} />
+          </motion.div>
+
+          {/* Footer Artikel */}
+          <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl">
+              <Tag className="w-4 h-4 text-amber-500" />
+              <span className="text-sm text-slate-400 font-medium tracking-wide">
+                Tags:{" "}
+                <span className="text-slate-300">
+                  Trading, Edukasi, {data.category}
+                </span>
+              </span>
+            </div>
+
+            <button className="flex items-center justify-center w-full md:w-auto gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-slate-300 font-bold hover:text-white hover:border-blue-500/40 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all shadow-lg group">
+              <Share2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>Bagikan Artikel</span>
+            </button>
+          </div>
+        </article>
+      </PageTransition>
     </main>
   );
 }

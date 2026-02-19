@@ -11,6 +11,7 @@ import {
   Clock,
   Globe,
 } from "lucide-react";
+import PageTransition from "@/components/PageTransition";
 
 export default function ToolsPage() {
   const [activeTab, setActiveTab] = useState<"lot" | "compound">("lot");
@@ -22,135 +23,139 @@ export default function ToolsPage() {
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
       <div className="absolute bottom-10 right-1/3 w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-4 md:px-6 space-y-12 relative z-10">
-        {/* HEADER */}
-        <div className="text-center animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
-              Trader
-            </span>{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600 drop-shadow-md">
-              Tools
-            </span>
-          </h1>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Gudang senjata untuk manajemen risiko, pemantauan berita ekonomi,
-            dan simulasi strategi.
-          </p>
-        </div>
-
-        {/* --- 1. MARKET SESSION (Live Status) --- */}
-        <MarketStatus />
-
-        {/* --- 2. CALCULATOR SECTION (Tab System) --- */}
-        <section className="animate-fade-in-up delay-100">
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              onClick={() => setActiveTab("lot")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
-                activeTab === "lot"
-                  ? "bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-900 shadow-[0_0_20px_rgba(245,158,11,0.3)] scale-105"
-                  : "bg-white/5 backdrop-blur-md text-slate-400 border border-white/10 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <Calculator className="w-4 h-4" /> Position Size
-            </button>
-            <button
-              onClick={() => setActiveTab("compound")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
-                activeTab === "compound"
-                  ? "bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-900 shadow-[0_0_20px_rgba(245,158,11,0.3)] scale-105"
-                  : "bg-white/5 backdrop-blur-md text-slate-400 border border-white/10 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <TrendingUp className="w-4 h-4" /> Compounding
-            </button>
+      {/* --- BUNGKUS KONTEN DENGAN ANIMASI SLOW --- */}
+      <PageTransition>
+        <div className="max-w-5xl mx-auto px-4 md:px-6 space-y-12 relative z-10">
+          {/* HEADER */}
+          <div className="text-center animate-fade-in-up">
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+                Trader
+              </span>{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600 drop-shadow-md">
+                Tools
+              </span>
+            </h1>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Gudang senjata untuk manajemen risiko, pemantauan berita ekonomi,
+              dan simulasi strategi.
+            </p>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
-            {/* Dekorasi Dalam Kartu */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+          {/* --- 1. MARKET SESSION (Live Status) --- */}
+          <MarketStatus />
 
-            {activeTab === "lot" ? <LotCalculator /> : <CompoundCalculator />}
-          </div>
-        </section>
-
-        {/* --- 3. FX REPLAY SIMULATOR --- */}
-        <section className="animate-fade-in-up delay-200">
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden relative group hover:border-amber-500/40 hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] transition-all duration-300">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-amber-500 shadow-inner group-hover:scale-110 group-hover:border-amber-500/50 transition-all">
-                  <Video className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
-                    FXReplay Simulator
-                  </h3>
-                  <p className="text-sm text-slate-400">
-                    Software backtesting terbaik untuk melatih "Muscle Memory".
-                  </p>
-                </div>
-              </div>
-              <a
-                href="https://fxreplay.com/?via=kate"
-                target="_blank"
-                className="px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-900 font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:scale-105 active:scale-95"
+          {/* --- 2. CALCULATOR SECTION (Tab System) --- */}
+          <section className="animate-fade-in-up delay-100">
+            <div className="flex justify-center gap-4 mb-8">
+              <button
+                onClick={() => setActiveTab("lot")}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+                  activeTab === "lot"
+                    ? "bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-900 shadow-[0_0_20px_rgba(245,158,11,0.3)] scale-105"
+                    : "bg-white/5 backdrop-blur-md text-slate-400 border border-white/10 hover:bg-white/10 hover:text-white"
+                }`}
               >
-                🚀 Coba Gratis Sekarang
-              </a>
+                <Calculator className="w-4 h-4" /> Position Size
+              </button>
+              <button
+                onClick={() => setActiveTab("compound")}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+                  activeTab === "compound"
+                    ? "bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-900 shadow-[0_0_20px_rgba(245,158,11,0.3)] scale-105"
+                    : "bg-white/5 backdrop-blur-md text-slate-400 border border-white/10 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                <TrendingUp className="w-4 h-4" /> Compounding
+              </button>
             </div>
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-              >
-                <source src="/assets/demo-fxreplay.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[2px] group-hover:backdrop-blur-none group-hover:bg-transparent transition-all duration-500">
-                <span className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-white border border-white/20 mb-2 shadow-lg">
-                  PREVIEW MODE
-                </span>
-                <h4 className="text-2xl md:text-4xl font-black text-white tracking-tight drop-shadow-2xl opacity-90 group-hover:opacity-0 transition-opacity transform translate-y-0 group-hover:translate-y-4">
-                  Uji Strategi 1 Tahun <br />{" "}
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-amber-500">
-                    Dalam 1 Hari
+
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+              {/* Dekorasi Dalam Kartu */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+
+              {activeTab === "lot" ? <LotCalculator /> : <CompoundCalculator />}
+            </div>
+          </section>
+
+          {/* --- 3. FX REPLAY SIMULATOR --- */}
+          <section className="animate-fade-in-up delay-200">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden relative group hover:border-amber-500/40 hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] transition-all duration-300">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-amber-500 shadow-inner group-hover:scale-110 group-hover:border-amber-500/50 transition-all">
+                    <Video className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+                      FXReplay Simulator
+                    </h3>
+                    <p className="text-sm text-slate-400">
+                      Software backtesting terbaik untuk melatih "Muscle
+                      Memory".
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href="https://fxreplay.com/?via=kate"
+                  target="_blank"
+                  className="px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-900 font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:scale-105 active:scale-95"
+                >
+                  🚀 Coba Gratis Sekarang
+                </a>
+              </div>
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                >
+                  <source src="/assets/demo-fxreplay.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[2px] group-hover:backdrop-blur-none group-hover:bg-transparent transition-all duration-500">
+                  <span className="bg-black/60 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-white border border-white/20 mb-2 shadow-lg">
+                    PREVIEW MODE
                   </span>
-                </h4>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* --- 4. ECONOMIC CALENDAR --- */}
-        <section className="animate-fade-in-up delay-300">
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl flex flex-col items-center hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300 group">
-            {/* WIDGET AREA (DIJEPIT MAKSIMAL 800PX DAN DITENGAHKAN) */}
-            <div className="w-full max-w-[800px]">
-              <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
-                <div className="p-3 bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-blue-400 shadow-inner group-hover:scale-110 group-hover:border-blue-500/50 transition-all">
-                  <CalendarDays className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
-                    Economic Calendar
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    Sumber: Investing.com (Waktu Jakarta/WIB)
-                  </p>
+                  <h4 className="text-2xl md:text-4xl font-black text-white tracking-tight drop-shadow-2xl opacity-90 group-hover:opacity-0 transition-opacity transform translate-y-0 group-hover:translate-y-4">
+                    Uji Strategi 1 Tahun <br />{" "}
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-amber-500">
+                      Dalam 1 Hari
+                    </span>
+                  </h4>
                 </div>
               </div>
+            </div>
+          </section>
 
-              <div className="w-full bg-[#020617]/50 backdrop-blur-md rounded-2xl overflow-hidden border border-white/5 shadow-inner">
-                <EconomicCalendarWidget />
+          {/* --- 4. ECONOMIC CALENDAR --- */}
+          <section className="animate-fade-in-up delay-300">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl flex flex-col items-center hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300 group">
+              {/* WIDGET AREA (DIJEPIT MAKSIMAL 800PX DAN DITENGAHKAN) */}
+              <div className="w-full max-w-[800px]">
+                <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                  <div className="p-3 bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 text-blue-400 shadow-inner group-hover:scale-110 group-hover:border-blue-500/50 transition-all">
+                    <CalendarDays className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                      Economic Calendar
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Sumber: Investing.com (Waktu Jakarta/WIB)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-full bg-[#020617]/50 backdrop-blur-md rounded-2xl overflow-hidden border border-white/5 shadow-inner">
+                  <EconomicCalendarWidget />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      </PageTransition>
     </main>
   );
 }

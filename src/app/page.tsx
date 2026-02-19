@@ -14,6 +14,7 @@ import {
 import { motion, Variants } from "framer-motion";
 import { getLiveStats } from "@/app/actions";
 import { TradeStats } from "@/types";
+import PageTransition from "@/components/PageTransition";
 
 // --- CONFIG ANIMASI ---
 const fadeInUp: Variants = {
@@ -75,180 +76,187 @@ export default function Home() {
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
       <div className="absolute bottom-10 left-1/3 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
-        {/* --- HERO SECTION --- */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center mb-24"
-        >
-          {/* Badge Live (Kartu Kaca) */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-xs font-medium text-amber-500 mb-6 shadow-xl cursor-default"
+      {/* --- BUNGKUS KONTEN DENGAN ANIMASI SLOW --- */}
+      <PageTransition>
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          {/* --- HERO SECTION --- */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-24"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-            </span>
-            Live Documentation Journey
-          </motion.div>
+            {/* Badge Live (Kartu Kaca) */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-xs font-medium text-amber-500 mb-6 shadow-xl cursor-default"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              Live Documentation Journey
+            </motion.div>
 
-          {/* Main Title */}
-          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400 drop-shadow-sm">
-              Real Journey Menuju
-            </span>
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-500 to-orange-600 drop-shadow-md">
-              Funded Trader
-            </span>
-          </h1>
+            {/* Main Title */}
+            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400 drop-shadow-sm">
+                Real Journey Menuju
+              </span>
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-amber-500 to-orange-600 drop-shadow-md">
+                Funded Trader
+              </span>
+            </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
-            Dokumentasi nyata perjalanan trading — jurnal jujur, evaluasi
-            kesalahan, dan proses membangun konsistensi. <br />
-            <span className="text-slate-200 font-medium">
-              Transparan. Terukur. Realistis.
-            </span>
-          </p>
+            {/* Subtitle */}
+            <p className="text-lg text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
+              Dokumentasi nyata perjalanan trading — jurnal jujur, evaluasi
+              kesalahan, dan proses membangun konsistensi. <br />
+              <span className="text-slate-200 font-medium">
+                Transparan. Terukur. Realistis.
+              </span>
+            </p>
 
-          {/* Buttons */}
-          <motion.div
+            {/* Buttons */}
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              <Link href="/journal">
+                <motion.div
+                  variants={scaleUp}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative px-8 py-4 rounded-xl flex items-center gap-2 shadow-[0_0_30px_rgba(251,191,36,0.3)] bg-gradient-to-r from-amber-500 via-yellow-300 to-amber-500 text-slate-950 font-bold tracking-wide"
+                >
+                  <span className="relative">👉 Lihat Jurnal Trading</span>
+                  <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
+                </motion.div>
+              </Link>
+
+              <Link href="/review-propfirm">
+                <motion.div
+                  variants={scaleUp}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 bg-white/5 backdrop-blur-xl text-slate-200 font-medium rounded-xl border border-white/10 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all flex items-center gap-2"
+                >
+                  🏆 Rekomendasi Propfirm
+                </motion.div>
+              </Link>
+            </motion.div>
+          </motion.section>
+
+          {/* --- LIVE STATS SECTION --- */}
+          <motion.section
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32"
           >
-            <Link href="/journal">
-              <motion.div
-                variants={scaleUp}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-4 rounded-xl flex items-center gap-2 shadow-[0_0_30px_rgba(251,191,36,0.3)] bg-gradient-to-r from-amber-500 via-yellow-300 to-amber-500 text-slate-950 font-bold tracking-wide"
-              >
-                <span className="relative">👉 Lihat Jurnal Trading</span>
-                <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
-              </motion.div>
-            </Link>
+            <StatsCard
+              icon={<ShieldCheck className="w-24 h-24 text-amber-500/80" />}
+              title="Live Balance"
+              value={
+                loading ? "Loading..." : formatCurrency(stats?.balance || 0)
+              }
+              subValue="Verified System"
+              subIcon={<ShieldCheck className="w-3 h-3" />}
+              subColor="text-emerald-400"
+            />
 
-            <Link href="/review-propfirm">
-              <motion.div
-                variants={scaleUp}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white/5 backdrop-blur-xl text-slate-200 font-medium rounded-xl border border-white/10 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all flex items-center gap-2"
-              >
-                🏆 Rekomendasi Propfirm
-              </motion.div>
-            </Link>
-          </motion.div>
-        </motion.section>
+            <StatsCard
+              icon={<BarChart2 className="w-24 h-24 text-blue-500/80" />}
+              title="Win Rate"
+              value={loading ? "..." : stats?.winRate?.toFixed(1) + "%"}
+              subValue={
+                loading ? "..." : `${stats?.totalTrades} Total Log Trade`
+              }
+              subColor="text-slate-300"
+            />
 
-        {/* --- LIVE STATS SECTION --- */}
-        <motion.section
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32"
-        >
-          <StatsCard
-            icon={<ShieldCheck className="w-24 h-24 text-amber-500/80" />}
-            title="Live Balance"
-            value={loading ? "Loading..." : formatCurrency(stats?.balance || 0)}
-            subValue="Verified System"
-            subIcon={<ShieldCheck className="w-3 h-3" />}
-            subColor="text-emerald-400"
-          />
-
-          <StatsCard
-            icon={<BarChart2 className="w-24 h-24 text-blue-500/80" />}
-            title="Win Rate"
-            value={loading ? "..." : stats?.winRate?.toFixed(1) + "%"}
-            subValue={loading ? "..." : `${stats?.totalTrades} Total Log Trade`}
-            subColor="text-slate-300"
-          />
-
-          <motion.div
-            variants={fadeInUp}
-            whileHover={{ y: -5 }}
-            className="p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-all relative overflow-hidden flex flex-col justify-between group"
-          >
-            <div>
-              <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2 drop-shadow">
-                Status Akun
-              </p>
-              <h3 className="text-4xl font-extrabold text-blue-400 mb-2 drop-shadow-md">
-                ON GOING
-              </h3>
-            </div>
-            <Link
-              href="/journal"
-              className="text-xs text-slate-300 hover:text-white underline decoration-white/30 underline-offset-4 transition-colors mt-4 block relative z-10"
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ y: -5 }}
+              className="p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-all relative overflow-hidden flex flex-col justify-between group"
             >
-              Lihat Detail Transaksi →
-            </Link>
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Activity className="w-24 h-24 text-blue-400" />
-            </div>
-          </motion.div>
-        </motion.section>
+              <div>
+                <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2 drop-shadow">
+                  Status Akun
+                </p>
+                <h3 className="text-4xl font-extrabold text-blue-400 mb-2 drop-shadow-md">
+                  ON GOING
+                </h3>
+              </div>
+              <Link
+                href="/journal"
+                className="text-xs text-slate-300 hover:text-white underline decoration-white/30 underline-offset-4 transition-colors mt-4 block relative z-10"
+              >
+                Lihat Detail Transaksi →
+              </Link>
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Activity className="w-24 h-24 text-blue-400" />
+              </div>
+            </motion.div>
+          </motion.section>
 
-        {/* --- WHY SECTION --- */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="border-t border-white/10 pt-16 relative"
-        >
-          <motion.div
-            variants={fadeInUp}
-            className="text-center mb-12 relative z-10"
+          {/* --- WHY SECTION --- */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="border-t border-white/10 pt-16 relative"
           >
-            <h2 className="text-3xl font-bold mb-4">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
-                Kenapa
-              </span>{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600">
-                Kang Trader?
-              </span>
-            </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full mb-4 opacity-80"></div>
-            <p className="text-slate-400 max-w-xl mx-auto">
-              Di dunia trading yang penuh fleksing profit, saya memilih jalur
-              sunyi: Transparansi.
-            </p>
-          </motion.div>
+            <motion.div
+              variants={fadeInUp}
+              className="text-center mb-12 relative z-10"
+            >
+              <h2 className="text-3xl font-bold mb-4">
+                <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+                  Kenapa
+                </span>{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-orange-600">
+                  Kang Trader?
+                </span>
+              </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full mb-4 opacity-80"></div>
+              <p className="text-slate-400 max-w-xl mx-auto">
+                Di dunia trading yang penuh fleksing profit, saya memilih jalur
+                sunyi: Transparansi.
+              </p>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-            <FeatureCard
-              icon={<TrendingUp className="w-6 h-6" />}
-              title="Real Process"
-              desc="Bukan cuma profit. Saya bagikan proses jatuh bangun & kesalahan di baliknya secara jujur."
-            />
-            <FeatureCard
-              icon={<BookOpen className="w-6 h-6" />}
-              title="Full Transparency"
-              desc="Semua trade dicatat. Semua emosi diakui. Tidak ada yang ditutup-tutupi."
-            />
-            <FeatureCard
-              icon={<AlertTriangle className="w-6 h-6" />}
-              title="Brutal Evaluation"
-              desc="Kenapa WR 41% masih minus? Saya bedah dosa 'Re-entry Paksa' & 'Overtrade'."
-            />
-            <FeatureCard
-              icon={<ShieldCheck className="w-6 h-6" />}
-              title="Pro Mindset"
-              desc="Bukan tempat cari sinyal. Ini tempat belajar berpikir dan bertindak seperti profesional."
-            />
-          </div>
-        </motion.section>
-      </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+              <FeatureCard
+                icon={<TrendingUp className="w-6 h-6" />}
+                title="Real Process"
+                desc="Bukan cuma profit. Saya bagikan proses jatuh bangun & kesalahan di baliknya secara jujur."
+              />
+              <FeatureCard
+                icon={<BookOpen className="w-6 h-6" />}
+                title="Full Transparency"
+                desc="Semua trade dicatat. Semua emosi diakui. Tidak ada yang ditutup-tutupi."
+              />
+              <FeatureCard
+                icon={<AlertTriangle className="w-6 h-6" />}
+                title="Brutal Evaluation"
+                desc="Kenapa WR 41% masih minus? Saya bedah dosa 'Re-entry Paksa' & 'Overtrade'."
+              />
+              <FeatureCard
+                icon={<ShieldCheck className="w-6 h-6" />}
+                title="Pro Mindset"
+                desc="Bukan tempat cari sinyal. Ini tempat belajar berpikir dan bertindak seperti profesional."
+              />
+            </div>
+          </motion.section>
+        </div>
+      </PageTransition>
     </main>
   );
 }
