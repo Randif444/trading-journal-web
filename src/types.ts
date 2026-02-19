@@ -5,3 +5,7 @@ export interface TradeStats {
 export interface Trade {
   [key: string]: any;
 }
+
+export interface DashboardStats {
+  [key: string]: any;
+}
