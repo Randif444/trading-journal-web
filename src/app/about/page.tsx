@@ -334,7 +334,7 @@ export default function AboutPage() {
               boxShadow: "0 0 30px rgba(245, 158, 11, 0.4)",
             }}
             whileTap={{ scale: 0.95 }}
-            href="https://wa.me/6281234567890?text=Halo%20Kang,%20Ngopi%20Yok!."
+            href="https://wa.me/6281331685146?text=Halo%20Kang,%20Ngopi%20Yok!."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-slate-900 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 rounded-2xl transition-all shadow-lg"
