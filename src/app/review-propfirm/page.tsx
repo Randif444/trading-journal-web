@@ -83,13 +83,14 @@ export default function ReviewPage() {
               rating="4.9"
               badge="BEST OVERALL"
               badgeColor="bg-amber-500 text-slate-900"
-              desc="Pilihan utama saya untuk High Stakes Challenge. Gaji bulanan & Growth Plan yang jelas."
+              desc="Propfirm dengan scaling plan terbaik dan opsi instant funding. Cocok untuk trader yang ingin grow akun hingga level besar dengan payout konsisten."
               pros={[
                 "Instant Funding Available",
-                "Gaji Bulanan (High Stakes)",
-                "Rule Paling Jelas",
+                "Profit Split hingga 100%",
+                "Scaling Plan jelas dan agresif",
+                "Reputasi kuat dan payout konsisten",
               ]}
-              cons={["Biaya sedikit lebih tinggi"]}
+              cons={["Biaya challenge standar industri"]}
               link="https://the5ers.com?ref=kangtrader"
               color="amber"
             />
@@ -101,13 +102,17 @@ export default function ReviewPage() {
               rating="4.8"
               badge="LEGENDARY"
               badgeColor="bg-purple-500 text-white"
-              desc="Raja propfirm dengan reputasi terbaik. Pilihan paling aman jika budget bukan masalah."
+              desc="Benchmark industri propfirm dengan reputasi terbaik, eksekusi stabil, dan sistem payout paling konsisten sejak 2015."
               pros={[
-                "Reputasi Terbaik (No Scam)",
-                "Swing Account Ada",
-                "Dashboard Canggih",
+                "Reputasi terbaik di industri",
+                "Dashboard analytics terbaik",
+                "Execution stabil dan profesional",
+                "Payout konsisten dan terpercaya",
               ]}
-              cons={["Biaya Termahal (€540)", "Target Profit Tinggi (10%)"]}
+              cons={[
+                "Biaya relatif premium",
+                "Scaling tidak seagresif beberapa kompetitor",
+              ]}
               link="https://ftmo.com/en/"
               color="purple"
             />
@@ -119,13 +124,17 @@ export default function ReviewPage() {
               rating="4.7"
               badge="BUDGET KING"
               badgeColor="bg-emerald-500 text-slate-900"
-              desc="Solusi untuk trader dengan modal terbatas. Tantangan murah dengan leverage tinggi."
+              desc="Propfirm dengan biaya kompetitif dan challenge fleksibel. Cocok untuk trader yang ingin mulai dengan modal lebih kecil."
               pros={[
-                "Biaya Termurah ($399)",
-                "Leverage Tinggi",
-                "Waktu Trading Unlimited",
+                "Biaya challenge kompetitif",
+                "Leverage hingga 1:100",
+                "Challenge fleksibel tanpa minimum trading days",
+                "Scaling cepat dan payout kompetitif",
               ]}
-              cons={["Reputasi Belum Se-senior FTMO", "Sering Maintenance"]}
+              cons={[
+                "Perusahaan lebih baru dibanding FTMO",
+                "Track record belum selama propfirm senior",
+              ]}
               link="https://app.fundingpips.com/register?ref=1d36d65a"
               color="emerald"
             />
@@ -166,42 +175,47 @@ export default function ReviewPage() {
                     feature="Biaya Challenge"
                     t5="$495"
                     ftmo="€540 (~$580)"
-                    fp="$399"
+                    fp="$399–$499 (promo dependent)"
                     highlight="fp"
                   />
+
                   <TableRow
                     feature="Profit Target (P1 / P2)"
-                    t5="8% / 5%"
+                    t5="8% / 5% (High Stakes)"
                     ftmo="10% / 5%"
                     fp="8% / 5%"
                     highlight="t5"
                   />
+
                   <TableRow
                     feature="Max Drawdown"
                     t5="10% (Static)"
                     ftmo="10% (Static)"
-                    fp="10% (Trailing)"
+                    fp="10% (Static atau Trailing tergantung challenge)"
                     highlight="t5"
                   />
+
                   <TableRow
                     feature="Daily Drawdown"
                     t5="5% (Equity Based)"
-                    ftmo="5% (Balance Based)"
-                    fp="5%"
-                    highlight="ftmo"
+                    ftmo="5% (Equity Based)"
+                    fp="5% (Equity Based)"
+                    highlight="tie"
                   />
+
                   <TableRow
-                    feature="Payout"
+                    feature="Payout Frequency"
                     t5="On Demand"
                     ftmo="Bi-Weekly"
                     fp="Weekly"
                     highlight="t5"
                   />
+
                   <TableRow
-                    feature="Gaji Bulanan?"
-                    t5="YA (High Stakes)"
-                    ftmo="TIDAK"
-                    fp="TIDAK"
+                    feature="Profit Split"
+                    t5="Up to 100%"
+                    ftmo="Up to 90%"
+                    fp="Up to 90%"
                     highlight="t5"
                   />
                 </tbody>
