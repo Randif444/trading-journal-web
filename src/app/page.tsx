@@ -189,9 +189,9 @@ export default function Home() {
                 <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2 drop-shadow">
                   Status Akun
                 </p>
-                <h3 className="text-4xl font-extrabold text-blue-400 mb-2 drop-shadow-md">
+                <p className="text-4xl font-extrabold text-blue-400 mb-2 drop-shadow-md">
                   ON GOING
-                </h3>
+                </p>
               </div>
               <Link
                 href="/journal"
@@ -276,9 +276,9 @@ function StatsCard({ icon, title, value, subValue, subIcon, subColor }: any) {
       <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2 drop-shadow">
         {title}
       </p>
-      <h3 className="text-4xl font-extrabold text-white mb-2 drop-shadow-md">
+      <p className="text-4xl font-extrabold text-white mb-2 drop-shadow-md">
         {value}
-      </h3>
+      </p>
       <div
         className={`flex items-center gap-2 ${subColor} text-xs font-medium w-fit px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/5`}
       >

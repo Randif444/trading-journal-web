@@ -26,7 +26,7 @@ export default function RootLayout({
         <div className="pt-20">{children}</div>
 
         {/* Footer disesuaikan bordernya dengan tema Glassmorphism */}
-        <footer className="border-t border-white/10 mt-20 py-8 bg-[#020617] text-center text-slate-500 text-sm relative z-10">
+        <footer className="border-t border-white/10 mt-20 py-8 bg-[#020617] text-center text-slate-400 text-sm relative z-10">
           <p>© 2026 KangTrader. Stay Humble, Stay Consistent.</p>
         </footer>
 

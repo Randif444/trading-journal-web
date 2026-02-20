@@ -24,7 +24,7 @@ const articles: any = {
       <p>Kenyataannya? <strong>Tidak ada strategi dengan Win Rate 100%.</strong> Bahkan trader profesional di bank besar pun sering mengalami loss. Lalu apa yang membedakan mereka dengan trader yang sering Margin Call (MC)? Jawabannya adalah <strong>Money Management (MM)</strong>.</p>
 
       <h3 class="text-2xl font-bold text-white mt-12 mb-6 drop-shadow-sm">#1 Aturan 1%: Menjaga Nafas Akun</h3>
-      <p>Aturan emas dalam propfirm maupun personal trading adalah: <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-md border border-blue-500/30 font-semibold backdrop-blur-sm">Jangan pernah meresikokan lebih dari 1% modal dalam satu kali transaksi.</span></p>
+      <p>Aturan emas dalam propfirm maupun personal trading adalah: <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-md border border-blue-500/30 font-semibold inline-block my-1">Jangan pernah meresikokan lebih dari 1% modal dalam satu kali transaksi.</span></p>
 
       <div class="bg-white/5 backdrop-blur-xl p-8 rounded-3xl border border-white/10 my-8 shadow-xl hover:border-white/20 transition-all">
         <h4 class="font-bold text-white mb-4 text-lg">Kenapa Harus 1%?</h4>

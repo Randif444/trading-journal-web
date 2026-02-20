@@ -47,6 +47,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle Menu"
               className="text-slate-300 hover:text-white focus:outline-none p-2"
             >
               {isOpen ? (
