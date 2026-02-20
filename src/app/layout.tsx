@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css"; // <--- WAJIB ADA: Ini pintu masuk semua style & warna!
 import Navbar from "@/components/Navbar";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,18 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-[#020617] text-slate-200 min-h-screen selection:bg-amber-500/30`}
       >
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-KODE_AKANG_DISINI`}
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-N09YN4WKHD');
+  `}
+        </Script>
         <Navbar />
 
         <div className="pt-20">{children}</div>
