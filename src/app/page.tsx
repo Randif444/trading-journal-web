@@ -133,7 +133,7 @@ export default function Home() {
                   whileTap={{ scale: 0.95 }}
                   className="group relative px-8 py-4 rounded-xl flex items-center gap-2 shadow-[0_0_30px_rgba(251,191,36,0.3)] bg-gradient-to-r from-amber-500 via-yellow-300 to-amber-500 text-slate-950 font-bold tracking-wide"
                 >
-                  <span className="relative">👉 Lihat Jurnal Trading</span>
+                  <span className="relative">Lihat Jurnal Trading</span>
                   <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
                 </motion.div>
               </Link>
@@ -145,7 +145,7 @@ export default function Home() {
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-4 bg-white/5 backdrop-blur-xl text-slate-200 font-medium rounded-xl border border-white/10 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all flex items-center gap-2"
                 >
-                  🏆 Rekomendasi Propfirm
+                  Rekomendasi Propfirm
                 </motion.div>
               </Link>
             </motion.div>
