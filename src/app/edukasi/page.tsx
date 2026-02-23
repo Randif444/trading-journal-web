@@ -1,98 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  Search,
-  BookOpen,
-  Clock,
-  ChevronRight,
-  Zap,
-  ShieldAlert,
-  Brain,
-  TrendingUp,
-  AlertTriangle,
-  Trophy,
-  Target,
-} from "lucide-react";
+import { supabase } from "@/lib/supabase"; // KABEL KE SUPABASE
+import { Search, BookOpen, Clock, ChevronRight } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
-
-// --- DATA ARTIKEL ---
-const articles = [
-  {
-    id: 1,
-    title: "Money Management: 'Holy Grail' yang Sebenarnya",
-    excerpt:
-      "Banyak trader mencari indikator sakti, padahal rahasia profit konsisten ada di pengaturan lot. Pelajari cara menghitung resiko 1% agar akunmu anti-guncangan.",
-    category: "Risk Management",
-    readTime: "8 min read",
-    date: "20 Feb 2025",
-    icon: <ShieldAlert className="w-6 h-6" />,
-    color: "emerald",
-    slug: "money-management",
-  },
-  {
-    id: 2,
-    title: "Cara Menentukan Support & Resistance Valid",
-    excerpt:
-      "Jangan terjebak dengan terlalu banyak garis di chart. Pelajari cara mengidentifikasi Key Level yang benar-benar diperhatikan oleh institusi besar.",
-    category: "Teknikal",
-    readTime: "6 min read",
-    date: "19 Feb 2025",
-    icon: <TrendingUp className="w-6 h-6" />,
-    color: "blue",
-    slug: "snr-valid",
-  },
-  {
-    id: 3,
-    title: "Teknik Entry: Kapan Harus Pencet Buy/Sell?",
-    excerpt:
-      "Mengupas tuntas 3 jenis eksekusi: Instant, Limit, dan Stop Order. Kapan waktu terbaik untuk 'Menunggu Diskon' dan kapan harus 'Mengejar Kereta'?",
-    category: "Strategi",
-    readTime: "7 min read",
-    date: "18 Feb 2025",
-    icon: <Target className="w-6 h-6" />,
-    color: "amber",
-    slug: "teknik-entry",
-  },
-  {
-    id: 4,
-    title: "Mengatur Emosi: Trading Tanpa Jantung Berdebar",
-    excerpt:
-      "Kenapa tangan gatal ingin entry? Kenapa takut cut loss? Bedah tuntas psikologi FOMO dan Revenge Trading yang sering menghancurkan akun.",
-    category: "Psikologi",
-    readTime: "5 min read",
-    date: "15 Feb 2025",
-    icon: <Brain className="w-6 h-6" />,
-    color: "purple",
-    slug: "psikologi-trading",
-  },
-  {
-    id: 5,
-    title: "7 Kesalahan Fatal Trader Pemula",
-    excerpt:
-      "Dari over-leverage hingga tidak punya trading plan. Pastikan kamu tidak melakukan dosa-dosa trading ini jika ingin bertahan lama di market.",
-    category: "Pemula",
-    readTime: "6 min read",
-    date: "10 Feb 2025",
-    icon: <AlertTriangle className="w-6 h-6" />,
-    color: "rose",
-    slug: "kesalahan-pemula",
-  },
-  {
-    id: 6,
-    title: "Strategi Lulus Challenge Propfirm (Tanpa FOMO)",
-    excerpt:
-      "Strategi khusus untuk menghadapi fase evaluasi. Mengapa mengejar target profit cepat justru membuatmu gagal? Gunakan mindset 'Slow but Sure'.",
-    category: "Propfirm",
-    readTime: "10 min read",
-    date: "05 Feb 2025",
-    icon: <Trophy className="w-6 h-6" />,
-    color: "indigo",
-    slug: "lulus-propfirm",
-  },
-];
 
 // --- ANIMASI ---
 const container: Variants = {
@@ -114,6 +27,61 @@ const item: Variants = {
 
 export default function EdukasiPage() {
   const [search, setSearch] = useState("");
+  const [articles, setArticles] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // --- MANTRA PENARIK DATA DARI SUPABASE ---
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const { data, error } = await supabase
+        .from("articles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Gagal menarik data:", error);
+      }
+
+      if (data) {
+        const colors = ["emerald", "blue", "amber", "purple", "rose", "indigo"];
+
+        const formattedData = data.map((art: any, index: number) => {
+          // Bikin URL ramah SEO dari judul jika slug tidak ada di database
+          const generateSlug = art.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-");
+
+          // Membersihkan tag HTML dari content untuk cuplikan (excerpt) di kartu depan
+          const stripHtml = (html: string) => {
+            const doc = new DOMParser().parseFromString(html, "text/html");
+            return doc.body.textContent || "";
+          };
+          const cleanExcerpt =
+            stripHtml(art.content || "").substring(0, 130) + "...";
+
+          return {
+            id: art.id,
+            title: art.title,
+            excerpt: cleanExcerpt,
+            category: art.category || "Edukasi", // Narik Kategori Asli
+            readTime: art.read_time || "5 Menit Baca", // Narik Read Time Asli
+            date: new Date(art.created_at).toLocaleDateString("id-ID", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            }),
+            icon: <BookOpen className="w-6 h-6" />,
+            color: colors[index % colors.length],
+            slug: art.slug || generateSlug, // Narik Slug Asli
+          };
+        });
+        setArticles(formattedData);
+      }
+      setLoading(false);
+    };
+
+    fetchArticles();
+  }, []);
 
   // Filter artikel berdasarkan search
   const filteredArticles = articles.filter(
@@ -185,22 +153,28 @@ export default function EdukasiPage() {
           </div>
 
           {/* --- ARTICLES GRID --- */}
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filteredArticles.length > 0 ? (
-              filteredArticles.map((article) => (
-                <ArticleCard key={article.id} data={article} />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-20 text-slate-500 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 border-dashed">
-                <p>Materi tidak ditemukan. Coba kata kunci lain.</p>
-              </div>
-            )}
-          </motion.div>
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500"></div>
+            </div>
+          ) : (
+            <motion.div
+              variants={container}
+              initial="hidden"
+              animate="visible"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredArticles.length > 0 ? (
+                filteredArticles.map((article) => (
+                  <ArticleCard key={article.id} data={article} />
+                ))
+              ) : (
+                <div className="col-span-full text-center py-20 text-slate-500 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 border-dashed">
+                  <p>Belum ada artikel atau materi tidak ditemukan.</p>
+                </div>
+              )}
+            </motion.div>
+          )}
         </div>
       </PageTransition>
     </main>
@@ -208,7 +182,6 @@ export default function EdukasiPage() {
 }
 
 // --- KOMPONEN KARTU ARTIKEL (GLASSMORPHISM) ---
-
 function ArticleCard({ data }: any) {
   // Konfigurasi dinamis untuk warna hover & shadow
   const colorStyles: any = {
@@ -245,14 +218,13 @@ function ArticleCard({ data }: any) {
     },
   };
 
-  const style = colorStyles[data.color];
+  const style = colorStyles[data.color] || colorStyles.emerald;
 
   return (
     <motion.article
       variants={item}
       className={`bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 hover:bg-white/10 transition-all duration-300 group flex flex-col h-full hover:-translate-y-2 relative overflow-hidden ${style.glow}`}
     >
-      {/* Background Decor */}
       <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
         {data.icon}
       </div>

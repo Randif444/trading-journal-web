@@ -36,20 +36,24 @@ export default function TradeTable({ trades }: { trades: Trade[] }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center px-1">
-        <div>
-          <h3 className="text-lg font-bold text-white">Trade Journal</h3>
-          <p className="text-xs text-slate-500">
+      {/* Ubah class di div ini: pakai px (kiri-kanan) dan pt (atas), pb (bawah) dikecilin */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-2 sm:px-4 pt-3 sm:pt-5 pb-1 gap-4 sm:gap-0">
+        <div className="flex flex-col gap-1">
+          <h3 className="text-xl font-bold text-white tracking-wide">
+            Trade Journal
+          </h3>
+          <p className="text-xs text-slate-400">
             Halaman {currentPage} dari {totalPages}
           </p>
         </div>
-        <span className="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-400 border border-slate-700">
+
+        <span className="px-4 py-1.5 bg-slate-800/80 rounded-full text-xs font-bold text-slate-300 border border-slate-700 shadow-sm">
           Total {trades.length} Records
         </span>
       </div>
 
       <div className="rounded-xl border border-slate-800 bg-slate-900 overflow-hidden shadow-lg">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-visible">
           <table className="w-full text-sm text-left">
             <thead className="bg-slate-950 text-slate-400 uppercase text-xs font-bold tracking-wider">
               <tr>
@@ -105,7 +109,7 @@ export default function TradeTable({ trades }: { trades: Trade[] }) {
                     {trade.lotSize}
                   </td>
 
-                  {/* KOLOM PNL DENGAN STATUS DIKEMBALIKAN */}
+                  {/* KOLOM PNL DENGAN STATUS */}
                   <td
                     className={`px-6 py-4 text-right font-bold ${
                       trade.status === "WIN" || trade.status === "TP"
@@ -144,16 +148,33 @@ export default function TradeTable({ trades }: { trades: Trade[] }) {
                     </div>
                   </td>
 
+                  {/* KOLOM DATA (ICONS) DENGAN HOVER TOOLTIP */}
                   <td className="px-6 py-4">
-                    <div className="flex justify-center gap-2">
+                    <div className="flex justify-center items-center gap-3">
                       {trade.screenshotBefore && (
-                        <ImageIcon className="w-4 h-4 text-slate-500" />
+                        <ImageIcon className="w-4 h-4 text-slate-500 hover:text-slate-300 transition-colors cursor-pointer" />
                       )}
                       {trade.screenshotAfter && (
-                        <ExternalLink className="w-4 h-4 text-slate-500" />
+                        <ExternalLink className="w-4 h-4 text-slate-500 hover:text-slate-300 transition-colors cursor-pointer" />
                       )}
+
+                      {/* ICON NOTE DENGAN LOGIKA HOVER/TOOLTIP */}
                       {trade.note && (
-                        <FileText className="w-4 h-4 text-slate-500" />
+                        <div className="relative group flex items-center justify-center">
+                          <FileText className="w-4 h-4 text-slate-500 group-hover:text-blue-400 transition-colors cursor-pointer" />
+
+                          {/* KOTAK TOOLTIP GAIB (MUNCUL PAS DI-HOVER) */}
+                          <div className="absolute right-full top-1/2 -translate-y-1/2 mr-3 hidden group-hover:block w-48 bg-slate-800 border border-slate-700 text-slate-300 text-xs text-left p-3 rounded-lg shadow-xl z-50">
+                            <p className="font-semibold text-white mb-1">
+                              Catatan Transaksi:
+                            </p>
+                            <p className="leading-relaxed">{trade.note}</p>
+
+                            {/* Buntut Panah Tooltip (Arah Kanan) */}
+                            <div className="absolute top-1/2 -right-[6px] -translate-y-1/2 border-y-[6px] border-y-transparent border-l-[6px] border-l-slate-700"></div>
+                            <div className="absolute top-1/2 -right-[5px] -translate-y-1/2 border-y-[5px] border-y-transparent border-l-[5px] border-l-slate-800"></div>
+                          </div>
+                        </div>
                       )}
                     </div>
                   </td>
@@ -194,7 +215,7 @@ export default function TradeTable({ trades }: { trades: Trade[] }) {
                     className={`min-w-[32px] h-8 rounded-lg text-xs font-bold transition-all flex-shrink-0 ${
                       currentPage === number
                         ? "bg-amber-500 text-slate-950"
-                        : "text-slate-400 bg-white/5"
+                        : "text-slate-400 bg-white/5 hover:bg-slate-800"
                     }`}
                   >
                     {number}
