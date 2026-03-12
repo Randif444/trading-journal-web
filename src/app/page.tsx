@@ -71,33 +71,22 @@ export default function Home() {
 
   return (
     <main className="min-h-screen pt-28 pb-20 text-slate-200 relative overflow-hidden">
-      {/* --- LAMPU SOROT RAHASIA (UNTUK EFEK GLASSMORPHISM) --- */}
       <div className="absolute top-10 left-0 w-[400px] h-[400px] bg-blue-600/15 rounded-full blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
       <div className="absolute bottom-10 left-1/3 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
-      {/* --- BUNGKUS KONTEN DENGAN ANIMASI SLOW --- */}
       <PageTransition>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           {/* --- HERO SECTION --- */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-center mb-24"
-          >
+          <section className="text-center mb-24">
             {/* Badge Live (Kartu Kaca) */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-xs font-medium text-amber-500 mb-6 shadow-xl cursor-default"
-            >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-xs font-medium text-amber-500 mb-6 shadow-xl cursor-default hover:scale-105 transition-transform duration-300">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
               </span>
               Live Documentation Journey
-            </motion.div>
+            </div>
 
             {/* Main Title */}
             <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
@@ -120,15 +109,9 @@ export default function Home() {
             </p>
 
             {/* Buttons */}
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            >
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/journal">
                 <motion.div
-                  variants={scaleUp}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="group relative px-8 py-4 rounded-xl flex items-center gap-2 shadow-[0_0_30px_rgba(251,191,36,0.3)] bg-gradient-to-r from-amber-500 via-yellow-300 to-amber-500 text-slate-950 font-bold tracking-wide"
@@ -140,7 +123,6 @@ export default function Home() {
 
               <Link href="/review-propfirm">
                 <motion.div
-                  variants={scaleUp}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-4 bg-white/5 backdrop-blur-xl text-slate-200 font-medium rounded-xl border border-white/10 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all flex items-center gap-2"
@@ -148,9 +130,8 @@ export default function Home() {
                   Rekomendasi Propfirm
                 </motion.div>
               </Link>
-            </motion.div>
-          </motion.section>
-
+            </div>
+          </section>
           {/* --- LIVE STATS SECTION --- */}
           <motion.section
             variants={staggerContainer}
