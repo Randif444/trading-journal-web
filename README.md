@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KangTrader — Journey to Funded Trader
 
-## Getting Started
+A personal trading journal and documentation platform built to track the real journey toward becoming a funded trader. Transparent, measurable, and realistic.
 
-First, run the development server:
+**Live:** [kang-trader.vercel.app](https://kang-trader.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Overview
+
+KangTrader is a full-stack web application that transforms raw trading data into a structured, publicly accessible documentation platform. It serves as both a personal accountability tool and a resource hub for traders looking to understand the prop firm ecosystem.
+
+---
+
+## Features
+
+- **Live Trading Journal** — Real-time transaction logs with entry/exit data, win rate tracking, and account balance updates
+- **Prop Firm Reviews** — Curated, honest reviews of proprietary trading firms based on direct experience
+- **Trading Tools** — Utility tools to support daily trading decisions
+- **Free Knowledge (Edukasi)** — Educational content on trading strategy, risk management, and consistency
+- **Live Stats Dashboard** — Real-time balance, win rate, and account status pulled from external webhook data
+
+---
+
+## Tech Stack
+
+| Technology | Usage |
+|---|---|
+| Next.js | Framework & routing |
+| Tailwind CSS | Styling |
+| Supabase | Database & real-time data |
+| REST API | External webhook data ingestion |
+
+---
+
+## Architecture
+
+The front-end is built with a strict separation between presentation and data-fetching layers. A modular component system adapts to dynamic JSON data shapes from external webhooks, allowing the dashboard to render and filter thousands of metric rows without performance degradation.
+
+```
+External Webhook → REST API → Supabase → Next.js → UI
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Technical Decisions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Modular UI components** — adaptable to varied and dynamic data shapes from external sources
+- **Decoupled data fetching** — presentation logic is fully separated from API calls for scalability
+- **Real-time ingestion** — live balance and win rate stats update without manual refresh
+- **CMS-style admin panel** — filterable and sortable metric tables for data management
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Local Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Clone the repository
+git clone https://github.com/Randif444/trading-journal-web.git
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Install dependencies
+cd trading-journal-web
+npm install
 
-## Deploy on Vercel
+# Set up environment variables
+cp .env.example .env.local
+# Fill in your Supabase URL, anon key, and any webhook secrets
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Run development server
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Environment Variables
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+---
+
+## Author
+
+**M. Randi Fathurrohman** — Front-End Developer
+- Portfolio: [randi-f.vercel.app](https://randi-f.vercel.app)
+- GitHub: [@Randif444](https://github.com/Randif444)
+- LinkedIn: [randifathurrohman](https://www.linkedin.com/in/randifathurrohman/)
